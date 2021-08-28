@@ -1,0 +1,34 @@
+---
+title: "Assessment 1.1"
+author: "Sandy Fairbairn Student ID s3874811"
+date: "19/08/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# RMarkdown **editing** _editing_ 
+
+[Rstudio](www.rstudio.com)
+
+
+fastfood <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-09-04/fastfood_calories.csv')
+
+
+
+knitr::kable(head(fastfood[1:10,]), "pipe")
+
+knitr::kable(fastfood[1:10, 1:5], "pipe")
+
+```R
+fastfood <-fastfood %>%
+filter(total_fat>40 & total_cab>80)
+
+```
+
+
+
+
+
