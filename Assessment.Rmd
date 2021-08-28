@@ -17,7 +17,6 @@ knitr::opts_chunk$set(echo = TRUE)
 fastfood <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-09-04/fastfood_calories.csv')
 
 
-
 knitr::kable(head(fastfood[1:10,]), "pipe")
 
 knitr::kable(fastfood[1:10, 1:5], "pipe")
@@ -27,6 +26,52 @@ fastfood <-fastfood %>%
 filter(total_fat>40 & total_cab>80)
 
 ```
+### Part 2
+
+```R
+skimr(fastfood)
+```
+
+fastfood <- fastfood(restaurant = c(),
+
+```{r}
+fastfood %>% group_by(restuarant) %>% summarise(avr_calories=mean(calories),
+```
+
+fastfood <- c("total calories"),
+total_calories <- c(1800)
+df <- data.frame(total_calories)
+
+```{r}
+fastfood %>% 
+      ggplot(aes(x=total_fat, y=total_carb))+
+      geom_point()+
+            geom_smooth(method = "lm")
+   
+
+##Part 3
+
+survey <- survey %>%
+  mutate(timestamp = mdy_hms(timestamp),
+         age_category = fct_relevel(fct_reorder(how_old_are_you, parse_number(how_old_are_you)), "under 18"),
+         experience_overall = str_replace(overall_years_of_professional_experience, " - ", "-"),
+         experience_overall = fct_reorder(experience_overall, parse_number(experience_overall)),
+         experience_in_field = str_replace(years_of_experience_in_field, " - ", "-"),
+         experience_in_field = fct_reorder(experience_in_field, parse_number(experience_in_field))) %>%
+  mutate(gender = fct_collapse(coalesce(gender, "Other or prefer not to answer"), "Other or prefer not to answer" = c("Other or prefer not to answer", "Prefer not to answer")),
+         race = fct_lump(coalesce(race, "Other"), 4),
+         age=parse_number(how_old_are_you))
+
+survey_usd <- survey %>%
+  filter(currency == "USD") %>%
+  filter(annual_salary >= 5000,
+         annual_salary <= 2e6) %>%
+  mutate(state = str_remove(state, ", .*"))
+
+calories_type %>%
+  ggplot(aes(age,annual_salary)) +
+  geom_col()+
+  coord_flip()
 
 
 
