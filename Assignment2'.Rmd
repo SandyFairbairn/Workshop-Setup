@@ -1,0 +1,147 @@
+---
+## Sandy Fairbairn **s3874811**
+
+---
+
+# Assignment 2
+
+---
+
+output: html_document
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(skimr)
+
+```
+
+library(tidyverse)
+library(lubridate)
+library(skimr)
+```{r}
+data<-read.csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-11-20/thanksgiving_meals.csv')
+```
+
+#Part 1 formatting RMarkdown document
+
+
+#1. Create an Rmarkdown document with webpage as output (same as in setup)
+
+---
+## Sandy Fairbairn **s3874811**
+
+---
+
+# Assignment 2
+
+---
+
+output: html_document
+
+
+
+#Part 2 Data Wrangling and visualization
+
+###1. Display the first 10 rows of the dataset using `kable()` function
+
+```{r}
+knitr::kable(data[1:10,1:5])
+```
+
+###2. Using `skim()` display the summary of variables. 
+```{r}
+library(skimr)
+skim(data)
+
+```
+
+###Think about the task to predict a family income based on their menu: what variables may be useful? Are all of them correct type?  Write 2-3 sentences with your explanation. 
+
+
+###3. Use `fct_reorder` and `parse_number` functions to create a factor variable `family_income`
+
+
+```{r}
+data<-data%>%
+  mutate(family_income_num=parse_number(as.character(family_income))) %>%
+   filter(!is.na(family_income_num))
+```
+###4. What is the number of people who celebrate?
+```{r}
+data%>% count(celebrate)
+```
+
+###5. What are categories and insights for each main dish served and the method it is prepared?
+```{r}
+data %>% count(main_dish)
+data %>% count(main_prep)
+```
+
+```{r}               
+###6. Create 3 different data viz showing insights for main dish served and the method. Provide your own legend and use themes. Write 2-3 sentences with your explanation of each insight.
+
+data$main_dish<-as.factor(data$main_dish)
+data$main_prep<-as.factor(data$main_prep)
+data$gender<-as.factor(data$gender)
+
+data%>% filter(main_dish == "Turkey") %>%
+  ggplot(aes(main_dish, fill=(main_prep)))+ geom_bar()
+
+
+```
+
+```{r}
+data%>% count (gravy =="Yes")
+data%>% count (cranberry == "Canned" | cranberry == "Homemade")
+```
+
+
+```{r}
+###8. What is the distribution of those who celebrate across income ranges. Create a data viz.Write 2-3 sentences with your explanation of each insight.
+
+```
+
+```{r}
+###10. Use the following code to create a new data set 2 mark
+
+select(id, starts_with("side"),
+         starts_with("pie"),
+         starts_with("dessert")) %>%
+  select(-side15, -pie13, -dessert12) %>%
+  gather(type, value, -id) %>%
+  filter(!is.na(value),
+         !value %in% c("None", "Other (please specify)")) %>%
+  mutate(type = str_remove(type, "\\d+"))
+
+### Write 2-3 sentences with your explanation of what it does
+
+
+
+```
+
+```{r}
+install.packages("widyr")
+###11. Intall package `widyr` and use `pairwise_cor()` function https://www.rdocumentation.org/packages/widyr/versions/0.1.3/topics/pairwise_cor
+
+# Write 2-3 sentences with your explanation of what it does
+```
+
+
+```{r}
+###13. Use `lm()` or randomForest() function to build a model that predict a family income based on data in the dataset
+
+# Compare 3 models using different set of input variables. Use different number of variables.
+
+# Explain your choice of variables (3 sentences) 
+
+# Write 2 sentences explaining which model os best.
+```
+#### Resources:
+
+RMarkdown tutorial https://rmarkdown.rstudio.com/lesson-1.html
+
+ggplot2: Elegant Graphics for Data Analysis https://ggplot2-book.org/
