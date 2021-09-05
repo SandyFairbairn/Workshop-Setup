@@ -1,41 +1,29 @@
 ---
-## Sandy Fairbairn
-**s3874811**
+## Sandy Fairbairn 
+## **s3874811**
 
 ---
-
 # Assignment 2
 
 ---
 
-output: html_document
+---
+output:  html_document: default
+---
+
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(error = TRUE)
+```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
-
-```
-
-
+---
 ```{r}
 data<-read.csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-11-20/thanksgiving_meals.csv')
 ```
-
-#Part 1 formatting RMarkdown document
-
-
-#1. Create an Rmarkdown document with webpage as output (same as in setup)
-
----
-## Sandy Fairbairn 
-## **s3874811**
----
-# Assignment 2
----
-
-
 
 #Part 2 Data Wrangling and visualization
 
